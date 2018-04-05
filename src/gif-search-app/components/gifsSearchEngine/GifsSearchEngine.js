@@ -1,17 +1,10 @@
-import React, {Component} from 'react'
-import SearchBar from '../components/searchBar/SearchBar'
-import GifList from '../components/gifList/GifList'
-import GifModal from '../components/gifModal/GifModal'
+import React, {Component} from 'react';
+import SearchBar from '../searchBar/SearchBar'
+import GifList from '../gifList/GifList'
+import GifModal from '../gifModal/GifModal'
 import {Link} from 'react-router'
 
-import {bindActionCreators} from 'redux'
-import * as Actions from '../actions'
-
-import {connect} from 'react-redux'
-
-import '../../styles/app.css'
-
-class App extends Component {
+export default class GifsSearchEngine extends Component {
 
   isFavoriteGif = () => {
     if (!this.props.selectedGif) {
@@ -42,27 +35,5 @@ class App extends Component {
     )
   }
 }
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  }
-}
-
-function mapStateToProps(state) {
-  return {
-    gifs: state.gifs.data,
-    modalIsOpen: state.modal.modalIsOpen,
-    selectedGif: state.modal.selectedGif,
-    favoriteGifIdsMap: state.favorites.favoriteGifIdsMap
-
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
-
-
-
-
-
+ 
 

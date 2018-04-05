@@ -1,8 +1,8 @@
 
 import { combineReducers } from 'redux'
-import GifsReducer, {initialState as initialStateGifsReducer} from './gifsReducer'
-import ModalReducer, { initialState as initialStateModalReducer} from './modalReducer'
-import FavoritesReducer, {initialState as initialStateFavoritesReducer } from './favoritesReducer'
+import GifsReducer, {initialState as initialStateGifsReducer} from '../reducers/gifsReducer'
+import ModalReducer, { initialState as initialStateModalReducer} from '../reducers/modalReducer'
+import FavoritesReducer, {initialState as initialStateFavoritesReducer } from '../reducers/favoritesReducer'
 
 import { routerReducer } from 'react-router-redux'
 
