@@ -1,12 +1,13 @@
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import * as Actions from '../actions'
+import * as GifsActions from '../actions/gifsActions'
+import * as ModalActions from '../actions/modalActions'
 
 import GifsSearchEngine from '../components/gifsSearchEngine/GifsSearchEngine'
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Object.assign({}, GifsActions, ModalActions), dispatch)
   }
 }
 

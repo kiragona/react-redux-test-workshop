@@ -1,4 +1,4 @@
-import {OPEN_MODAL, CLOSE_MODAL} from '../actions'
+import {OPEN_MODAL, CLOSE_MODAL} from '../actions/modalActions'
 
 const initialState = {
   selectedGif: null,

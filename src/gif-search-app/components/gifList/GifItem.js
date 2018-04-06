@@ -11,7 +11,7 @@ class GifItem extends Component {
            onClick={() => {
              onGifSelect(gif)
            }}>
-        <img alt='i' src={gif.images.downsized.url}/>
+        <img alt='' src={gif.images.downsized.url}/>
       </div>
     )
   }

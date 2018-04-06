@@ -1,4 +1,4 @@
-import {SET_FAVORITE_GIF} from '../actions'
+import {SET_FAVORITE_GIF} from '../actions/favoritesActions'
 
 const initialState = {
   favoriteGifIdsMap: new Map()

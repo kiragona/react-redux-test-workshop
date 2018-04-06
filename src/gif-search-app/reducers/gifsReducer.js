@@ -1,4 +1,4 @@
-import {RECEIVE_GIFS} from '../actions'
+import {RECEIVE_GIFS} from '../actions/gifsActions'
 
 const initialState = {
   data: []
@@ -10,7 +10,6 @@ export default function gifsReducer(state = initialState, action) {
       return {
         ...state, data: action.payload
       }
-
 
     default:
       return state
