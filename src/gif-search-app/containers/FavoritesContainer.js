@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux/index'
+import {bindActionCreators} from 'redux'
 import * as GifsActions from '../actions/gifsActions'
 import * as FavoritesActions from '../actions/favoritesActions'
 import * as ModalActions from '../actions/modalActions'
@@ -8,7 +8,7 @@ import Favorites from '../components/favorites/Favorites'
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object,assign({}, GifsActions, FavoritesActions, ModalActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, GifsActions, FavoritesActions, ModalActions), dispatch)
   }
 }
 
