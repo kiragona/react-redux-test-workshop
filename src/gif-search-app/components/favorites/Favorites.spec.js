@@ -1,10 +1,10 @@
 import test from 'tape'
-import {shallow, mount} from 'enzyme'
+import {shallow} from 'enzyme'
 import React from 'react'
 import sinon from 'sinon'
 
-import {createDom} from '../../../../test/utils'
-import {gif1, favoritesMap} from '../../../../test/mocks/dataMocks'
+import '../../../../test/utils'
+import {gif1, gif3, favoritesMap} from '../../../../test/mocks/dataMocks'
 
 
 import GifList from '../gifList/GifList'
@@ -14,15 +14,6 @@ import {Link} from 'react-router'
 
 import Favorites from './Favorites'
 
-
-test.only('Favorites: rendering', t => {
-  t.plan(1)
-  try {
-    t.ok(true, 'dummy test ok')
-  } catch (e) {
-    t.fail(e.message)
-  }
-})
 
 test('Favorites: rendering', t => {
   t.plan(5)
@@ -42,26 +33,22 @@ test('Favorites: rendering', t => {
   }
 })
 
-test('Favorites: test provided CBs invocation', t => {
-  t.plan(2)
+test('Favorites: test openModal CB invocation', t => {
+  t.plan(1)
   try {
 
     const props = {
-      selectedGif: selectedGif,
+      selectedGif: gif1,
       favoriteGifIdsMap: favoritesMap,
-      actions: {
-        closeModal: sinon.spy(),
-        setFavoriteGif: sinon.spy(),
-        openModal: sinon.spy(),
-      }
+      openModal: sinon.spy()
+
     }
     const wrapper = shallow(<Favorites {...props}/>)
 
-
+    //check openModal invocation
     wrapper.find(GifList).prop('onGifSelect')()
-    t.ok(props.actions.openModal.called, 'open modal was invoked from GifList on select gif')
-    wrapper.find(GifModal).prop('onRequestClose')()
-    t.ok(props.actions.closeModal.called, 'close modal was invoked from GifModal')
+    t.ok(props.openModal.calledOnce, 'open modal was invoked from GifList on select gif')
+
 
   } catch (e) {
     t.fail(e.message)
@@ -69,27 +56,102 @@ test('Favorites: test provided CBs invocation', t => {
   }
 })
 
-test('Favorites: test isFavoriteGif method', async t => {
-    t.plan(2)
+test('Favorites: test closeModal CB invocation', t => {
+  t.plan(1)
+  try {
+
+    const props = {
+      selectedGif: gif1,
+      favoriteGifIdsMap: favoritesMap,
+      closeModal: sinon.spy()
+
+    }
+    const wrapper = shallow(<Favorites {...props}/>)
+
+    //check close modal invocation
+    wrapper.find(GifModal).prop('onRequestClose')()
+    t.ok(props.closeModal.calledOnce, 'close modal was invoked from GifModal')
+
+  } catch (e) {
+    t.fail(e.message)
+
+  }
+})
+
+test('Favorites: test isFavoriteGif method', t => {
+    t.plan(3)
     try {
 
       const props = {
-        selectedGif: selectedGif,
+        selectedGif: gif1,
         favoriteGifIdsMap: favoritesMap,
-        actions: {
-          closeModal: sinon.spy(),
-          setFavoriteGif: sinon.spy(),
-          openModal: sinon.spy(),
-        }
+        setFavoriteGif: sinon.spy()
       }
 
-      await createDom()
-      const wrapper = mount(<Favorites {...props}/>)
+      const wrapper = shallow(<Favorites {...props}/>)
 
       let res = wrapper.instance().isFavoriteGif(null, favoritesMap)
-      t.ok(!res, 'isFavoriteGif return correct output, with no selected gif is provided')
-      res = wrapper.instance().isFavoriteGif(selectedGif, favoritesMap)
-      t.ok(res, 'isFavoriteGif return correct output,  with selected gif is provided')
+      t.ok(!res, 'isFavoriteGif return correct output for null input as selected gif')
+
+      res = wrapper.instance().isFavoriteGif(gif3, favoritesMap)
+      t.ok(!res, 'isFavoriteGif return correct output for not favorite gif')
+
+      res = wrapper.instance().isFavoriteGif(gif1, favoritesMap)
+      t.ok(res, 'isFavoriteGif return correct output for favorite gif')
+    } catch
+      (e) {
+      console.log(e.stack)
+      t.fail(e.message)
+    }
+  }
+)
+
+test('Favorites: test handleGifSelection method', t => {
+    t.plan(2)
+    try {
+
+      let wrapper = shallow(<Favorites />)
+      wrapper.instance().handleGifSelection(gif1)
+      t.pass('handleGifSelection works properly when no openModal CB is provided')
+
+      const props = {
+        selectedGif: gif1,
+        favoriteGifIdsMap: favoritesMap,
+        openModal: sinon.spy()
+      }
+
+      wrapper = shallow(<Favorites {...props}/>)
+      wrapper.instance().handleGifSelection(gif1)
+      t.ok(props.openModal.calledOnce, 'handleGifSelection works properly when openModal CB is provided')
+
+
+    } catch
+      (e) {
+      console.log(e.stack)
+      t.fail(e.message)
+    }
+  }
+)
+
+test('Favorites: test onCloseModal method', t => {
+    t.plan(2)
+    try {
+
+      let wrapper = shallow(<Favorites />)
+      wrapper.instance().onCloseModal(gif1)
+      t.pass('onCloseModal works properly when no closeModal CB is provided')
+
+      const props = {
+        selectedGif: gif1,
+        favoriteGifIdsMap: favoritesMap,
+        closeModal: sinon.spy()
+      }
+
+      wrapper = shallow(<Favorites {...props}/>)
+      wrapper.instance().onCloseModal(gif1)
+      t.ok(props.closeModal.calledOnce, 'handleGifSelection works properly when closeModal CB is provided')
+
+
     } catch
       (e) {
       console.log(e.stack)

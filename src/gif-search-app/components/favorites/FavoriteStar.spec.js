@@ -5,7 +5,7 @@ import React from 'react'
 import sinon from 'sinon'
 
 
-test('FavoriteStar: rendering regular start', async t => {
+test('FavoriteStar: rendering regular start',  t => {
   t.plan(1)
   try {
     const wrapper = shallow(<FavoriteStar/>)
@@ -16,7 +16,7 @@ test('FavoriteStar: rendering regular start', async t => {
   }
 })
 
-test('FavoriteStar: rendering favorite star', async t => {
+test('FavoriteStar: rendering favorite star',  t => {
   t.plan(1)
   try {
     const wrapper = shallow(<FavoriteStar isFavorite/>)
@@ -27,7 +27,7 @@ test('FavoriteStar: rendering favorite star', async t => {
   }
 })
 
-test('FavoriteStar: check onFavoriteChange CB invocation', async t => {
+test('FavoriteStar: check onFavoriteChange CB invocation',  t => {
   t.plan(2)
   try {
     const onFavoriteChangeSpy = sinon.spy()
@@ -36,6 +36,17 @@ test('FavoriteStar: check onFavoriteChange CB invocation', async t => {
     mainDivElement.simulate('click')
     t.ok(onFavoriteChangeSpy.calledOnce, 'onFavoriteChange was called once')
     t.equals(onFavoriteChangeSpy.args[0][0], true, 'onFavoriteChange was called with correct args')
+  } catch (error) {
+    t.fail(error.message)
+  }
+})
+
+test('FavoriteStar: handleClick method',  t => {
+  t.plan(1)
+  try {
+    const wrapper = shallow(<FavoriteStar />)
+    wrapper.instance().handleClick()
+    t.pass('handleClick method works properly when no onFavoriteChange CB is provided')
   } catch (error) {
     t.fail(error.message)
   }
