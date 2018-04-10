@@ -16,4 +16,5 @@ class GifItem extends Component {
     )
   }
 }
+
 export default GifItem

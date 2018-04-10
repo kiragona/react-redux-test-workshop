@@ -13,31 +13,16 @@ export default class FavoriteStar extends Component {
     isFavorite: false
   }
 
-
-  constructor(props) {
-    super(props)
-
-    this.state = {isFavorite: this.props.isFavorite}
-  }
-
-
   handleClick = () => {
-    let isCurrentFavorite = this.state.isFavorite
-    this.setState({
-      isFavorite: !isCurrentFavorite
-    })
-
     if (this.props.onFavoriteChange) {
-      this.props.onFavoriteChange(!isCurrentFavorite)
+      this.props.onFavoriteChange(!this.props.isFavorite)
     }
   }
 
-
   render() {
-
     let starClassName = (this.props.isFavorite) ? 'star-favorite' : 'star'
     return (
-      <div className={starClassName} onClick={this.handleClick}></div>
+      <div className={starClassName} onClick={this.handleClick}/>
     )
   }
 

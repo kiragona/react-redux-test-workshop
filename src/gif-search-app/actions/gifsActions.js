@@ -4,12 +4,8 @@ export const RECEIVE_GIFS = 'RECEIVE_GIFS'
 
 export const FAILED_RECEIVE_GIFS = 'FAILED_RECEIVE_GIFS'
 
-
 const API_URL = 'http://api.giphy.com/v1/gifs/search?q='
 const API_KEY = '&api_key=dc6zaTOxFJmzC'
-
-//async action
-// Async actions
 
 
 export const get = (url) => {
@@ -34,7 +30,7 @@ export const success = (response) => {
 
 
 export function requestGifs(term: null) {
-  return (dispatch: () => void) => {
+  return (dispatch) => {
 
     let url = `${API_URL}${term.replace(/\s/g, '+')}${API_KEY}`
     return get(url)
@@ -43,7 +39,8 @@ export function requestGifs(term: null) {
         dispatch(receiveGifs(data))
       })
       .catch((error) => {
-        dispatch(failedReceiveGifs(error))
+        dispatch(failedReceiveGifs('error: failed to retrieve gifs'))
+        dispatch([])
       })
   }
 }

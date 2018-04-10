@@ -3,34 +3,69 @@ import SearchBar from '../searchBar/SearchBar'
 import GifList from '../gifList/GifList'
 import GifModal from '../gifModal/GifModal'
 import {Link} from 'react-router'
+import PropTypes from 'prop-types'
 
 export default class GifsSearchEngine extends Component {
 
-  isFavoriteGif = () => {
-    if (!this.props.selectedGif) {
+  static propTypes = {
+    requestGifs: PropTypes.func,
+    setFavoriteGif: PropTypes.func,
+    openModal: PropTypes.func,
+    closeModal: PropTypes.func,
+    gifs: PropTypes.arrayOf(PropTypes.object),
+    modalIsOpen: PropTypes.bool,
+    selectedGif: PropTypes.object,
+    favoriteGifIdsMap: PropTypes.object
+  }
+
+
+  static defaultProps = {
+    gifs: [],
+    modalIsOpen: false,
+    selectedGif: null,
+    favoriteGifIdsMap: new Map()
+  }
+
+  isFavoriteGif = (selectedGif, favoritesMap) => {
+    if (!selectedGif || !favoritesMap) {
       return false
     }
 
-    return (this.props.favoriteGifIdsMap.get(this.props.selectedGif.id) !== undefined)
+    return (favoritesMap.get(selectedGif.id) !== undefined)
+  }
+
+  onCloseModal = () => {
+    const {closeModal} = this.props
+    if (closeModal) {
+      closeModal()
+    }
+  }
+
+  handleGifSelection = (selectedGif) => {
+    const {openModal} = this.props
+    if (openModal) {
+      openModal(selectedGif)
+    }
   }
 
   render() {
+    const {favoriteGifIdsMap, modalIsOpen, selectedGif, setFavoriteGif, requestGifs} = this.props
 
     return (
       <div className="app">
         <div className="appTitle">Gifs Search Engine</div>
         <div className="searchFavoritesHolder">
-          <SearchBar onTermChange={this.props.actions.requestGifs}/>
+          <SearchBar onTermChange={requestGifs}/>
           <div className="favoriteLinkHolder">
-            <Link to='/favorites'>Show Favorites</Link>
+            <Link className='showFavorites' to='/favorites'>Show Favorites</Link>
           </div>
         </div>
-        <GifList gifs={this.props.gifs} onGifSelect={selectedGif => this.props.actions.openModal({selectedGif})}/>
-        <GifModal modalIsOpen={this.props.modalIsOpen}
-                  selectedGif={this.props.selectedGif}
-                  isFavorite={this.isFavoriteGif()}
-                  setFavoriteGif={this.props.actions.setFavoriteGif}
-                  onRequestClose={() => this.props.actions.closeModal()}/>
+        <GifList gifs={this.props.gifs} onGifSelect={this.handleGifSelection}/>
+        <GifModal modalIsOpen={modalIsOpen}
+                  selectedGif={selectedGif}
+                  isFavorite={this.isFavoriteGif(selectedGif, favoriteGifIdsMap)}
+                  setFavoriteGif={setFavoriteGif}
+                  onRequestClose={this.onCloseModal}/>
       </div>
     )
   }

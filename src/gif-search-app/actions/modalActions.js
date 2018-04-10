@@ -4,7 +4,7 @@ export const CLOSE_MODAL = 'CLOSE_MODAL'
 export function openModal(gif) {
   return {
     type: OPEN_MODAL,
-    gif
+    gif : gif
   }
 }
 
