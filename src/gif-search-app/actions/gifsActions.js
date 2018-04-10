@@ -1,10 +1,8 @@
-
-
 export const REQUEST_GIFS = 'REQUEST_GIFS'
 
 export const RECEIVE_GIFS = 'RECEIVE_GIFS'
 
-
+export const FAILED_RECEIVE_GIFS = 'FAILED_RECEIVE_GIFS'
 
 
 const API_URL = 'http://api.giphy.com/v1/gifs/search?q='
@@ -45,9 +43,8 @@ export function requestGifs(term: null) {
         dispatch(receiveGifs(data))
       })
       .catch((error) => {
-        console.log('failed to fetch gifs', error)
+        dispatch(failedReceiveGifs(error))
       })
-
   }
 }
 
@@ -55,6 +52,13 @@ export function receiveGifs(data) {
   return {
     type: RECEIVE_GIFS,
     payload: data
+  }
+}
+
+export function failedReceiveGifs(error) {
+  return {
+    type: FAILED_RECEIVE_GIFS,
+    error: error
   }
 }
 
