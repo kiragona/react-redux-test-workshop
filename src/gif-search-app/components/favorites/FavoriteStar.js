@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
-
 export default class FavoriteStar extends Component {
 
   static propTypes = {
@@ -25,5 +24,6 @@ export default class FavoriteStar extends Component {
       <div className={starClassName} onClick={this.handleClick}/>
     )
   }
-
 }
+
+
