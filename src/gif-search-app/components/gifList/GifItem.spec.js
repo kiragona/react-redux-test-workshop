@@ -19,6 +19,19 @@ test('GifItem: rendering', t => {
   }
 })
 
+test('GifItem: rendering with invalid gif shape', t => {
+  t.plan(1)
+  try {
+
+    const wrapper = shallow(<GifItem gif='aaa'/>)
+    const gifItemDiv = wrapper.find('.gif-item')
+    t.equal(gifItemDiv.length, 1, 'GifItem was rendered')
+
+  } catch (e) {
+    t.fail(e.message)
+  }
+})
+
 test('GifItem: onGifSelect invocation', t => {
   t.plan(2)
   try {
@@ -35,4 +48,21 @@ test('GifItem: onGifSelect invocation', t => {
     t.fail(e.message)
   }
 })
+
+test('GifItem: test selectGif method', t => {
+  t.plan(1)
+  try {
+
+
+    const wrapper = shallow(<GifItem gif={gif1}/>)
+    wrapper.instance().selectGif()
+    t.pass( 'selectGif works correctly when no onGifSelect is provided')
+
+
+
+  }catch (e) {
+    t.fail(e.message)
+  }
+})
+
 
