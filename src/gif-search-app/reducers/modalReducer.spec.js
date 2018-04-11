@@ -1,5 +1,5 @@
 import modalReducer from './modalReducer'
-import {openModal, closeModal, OPEN_MODAL} from '../actions/modalActions'
+import {openModal, closeModal} from '../actions/modalActions'
 import {initialState} from './modalReducer'
 import test from 'tape'
 
@@ -11,13 +11,10 @@ test('modalReducer: openModal', t => {
 
   try {
     const expectedState =  {gif: gif1, modalIsOpen: true}
-
     const resState = modalReducer(initialState, openModal(gif1, true))
     t.deepEqual(expectedState, resState, 'OPEN_MODAL works properly')
-
   }catch (e) {
     t.fail(e.message)
-
   }
 })
 
