@@ -15,7 +15,6 @@ test('Test SET_FAVORITE_GIF action creator', t => {
 
   } catch (e) {
     t.fail(e.message)
-    t.end()
   }
 
 })

@@ -1,5 +1,4 @@
 export const REQUEST_GIFS = 'REQUEST_GIFS'
-
 export const RECEIVE_GIFS = 'RECEIVE_GIFS'
 
 export const FAILED_RECEIVE_GIFS = 'FAILED_RECEIVE_GIFS'
@@ -21,15 +20,27 @@ export const get = (url) => {
 
 
 export const success = (response) => {
+  let responseStatus = response.status
+  if (responseStatus < 400) {
+    // we got one of 'not error' HTTP status response code: see http://www.restapitutorial.com/httpstatuscodes.html
+    return response.json()
+      .then((json) => {
+        return json.data
+      })
+  }
+  return Promise.reject(response)
+}
+
+/*export const success = (response) => {
   return response.json()
     .then((json) => {
       return json.data
     })
     .catch(() => (Promise.resolve())) // Some responses don't contain a body
-}
+}*/
 
 
-export function requestGifs(term: null) {
+export function requestGifs(term) {
   return (dispatch) => {
 
     let url = `${API_URL}${term.replace(/\s/g, '+')}${API_KEY}`
@@ -39,7 +50,7 @@ export function requestGifs(term: null) {
         dispatch(receiveGifs(data))
       })
       .catch((error) => {
-        dispatch(failedReceiveGifs('error: failed to retrieve gifs'))
+        dispatch(failedReceiveGifs('error: failed to retrieve gifs', error.status))
         dispatch(receiveGifs([]))
       })
   }
@@ -52,10 +63,11 @@ export function receiveGifs(data) {
   }
 }
 
-export function failedReceiveGifs(error) {
+export function failedReceiveGifs(errorMsg, errorCode) {
   return {
     type: FAILED_RECEIVE_GIFS,
-    error: error
+    errorMsg: errorMsg,
+    errorCode: errorCode
   }
 }
 
