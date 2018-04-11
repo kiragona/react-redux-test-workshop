@@ -40,7 +40,7 @@ export function requestGifs(term: null) {
       })
       .catch((error) => {
         dispatch(failedReceiveGifs('error: failed to retrieve gifs'))
-        dispatch([])
+        dispatch(receiveGifs([]))
       })
   }
 }
