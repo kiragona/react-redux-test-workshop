@@ -22,7 +22,15 @@ const initialAppState = {
   favorites: initialStateFavoritesReducer
 }
 
-export {
-  initialAppState
+const createInitialAppState = (gifsList, favoritesGifs) => {
+  return {
+    gifs: gifsList ? {...initialStateGifsReducer, data: gifsList}  : initialStateGifsReducer,
+    modal: initialStateModalReducer,
+    favorites: favoritesGifs ? {...initialStateFavoritesReducer, favoriteGifIdsMap:  favoritesGifs} : initialStateFavoritesReducer
+  }
 }
 
+export {
+  initialAppState,
+  createInitialAppState
+}
