@@ -23,7 +23,7 @@ module.exports = function createDOM(isLogging) {
         if (err) return reject(err)
         //add polyfill for window.fetch
         //window.fetch = require('whatwg-fetch').fetch
-        global.window = window;
+        global.window = window
         global.document = window.document
         Object.keys(window).forEach((property) => {
           if (typeof global[property] === 'undefined') {
