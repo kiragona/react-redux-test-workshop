@@ -36,7 +36,6 @@ export const success = (response) => {
     .then((json) => {
       return json.data
     })
-    .catch(() => (Promise.resolve())) // Some responses don't contain a body
 }*/
 
 
