@@ -8,11 +8,11 @@ import {gifsList} from '../../../test/mocks/dataMocks'
 import {createInitialAppState} from '../store/rootReducer'
 import GifsSearchEngineContainer from './GifsSearchEngineContainer'
 
-test('GifsSearchEngineContainer: connect to Redux store', async t => {
+test('GifsSearchEngineContainer: connect to Redux store', t => {
     t.plan(1)
     try {
 
-      await createDom()
+      createDom()
       const store = configureStore(createInitialAppState(gifsList))
       const wrapper = mount(
         <Provider store={store}>

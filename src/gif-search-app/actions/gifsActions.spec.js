@@ -11,12 +11,10 @@ const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
 
-test('Test requestGifs ASYNC action: success path', async t => {
+test('Test requestGifs ASYNC action: success path', t => {
   t.plan(1)
   let nockScope = null
   try {
-
-    await createDom()
 
     const expectedActions = [receiveGifs({data: []})]
 
@@ -42,12 +40,10 @@ test('Test requestGifs ASYNC action: success path', async t => {
 })
 
 
-test('Test requestGifs ASYNC action: failure path', async t => {
+test('Test requestGifs ASYNC action: failure path', t => {
   t.plan(1)
   let nockScope = null
   try {
-
-    await createDom()
 
     const store = mockStore(initialAppState)
     // mock failure fetch request

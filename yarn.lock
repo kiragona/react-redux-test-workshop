@@ -4501,6 +4501,10 @@ jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://nexus.exelator.net/repository/npm-all/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
 
+jsdom-global@^3.0.2:
+  version "3.0.2"
+  resolved "https://nexus.exelator.net/repository/npm-all/jsdom-global/-/jsdom-global-3.0.2.tgz#6bd299c13b0c4626b2da2c0393cd4385d606acb9"
+
 jsdom@^11.7.0:
   version "11.7.0"
   resolved "https://nexus.exelator.net/repository/npm-all/jsdom/-/jsdom-11.7.0.tgz#8b45b657dae90d6d2d3a5f5d1126bb7102d0a172"
@@ -5227,6 +5231,10 @@ node-fetch@^1.0.1:
   dependencies:
     encoding "^0.1.11"
     is-stream "^1.0.1"
+
+node-fetch@^2.1.2:
+  version "2.1.2"
+  resolved "https://nexus.exelator.net/repository/npm-all/node-fetch/-/node-fetch-2.1.2.tgz#ab884e8e7e57e38a944753cec706f788d1768bb5"
 
 node-forge@0.7.1:
   version "0.7.1"
@@ -8053,7 +8061,7 @@ whatwg-fetch@2.0.3:
   version "2.0.3"
   resolved "https://nexus.exelator.net/repository/npm-all/whatwg-fetch/-/whatwg-fetch-2.0.3.tgz#9c84ec2dcf68187ff00bc64e1274b442176e1c84"
 
-whatwg-fetch@>=0.10.0, whatwg-fetch@^2.0.4:
+whatwg-fetch@>=0.10.0:
   version "2.0.4"
   resolved "https://nexus.exelator.net/repository/npm-all/whatwg-fetch/-/whatwg-fetch-2.0.4.tgz#dde6a5df315f9d39991aa17621853d720b85566f"
 
