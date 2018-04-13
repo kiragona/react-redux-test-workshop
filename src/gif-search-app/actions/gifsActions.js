@@ -1,3 +1,4 @@
+import fetch from 'node-fetch'
 export const REQUEST_GIFS = 'REQUEST_GIFS'
 export const RECEIVE_GIFS = 'RECEIVE_GIFS'
 
@@ -9,7 +10,7 @@ const API_KEY = '&api_key=dc6zaTOxFJmzC'
 
 export const get = (url) => {
 
-  return window.fetch(url,
+  return fetch(url,
     {
       method: 'GET',
       headers: {

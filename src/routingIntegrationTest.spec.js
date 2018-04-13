@@ -13,12 +13,12 @@ import {Router, Route, createMemoryHistory} from 'react-router'
 
 import {syncHistoryWithStore} from 'react-router-redux'
 
-test('Integration Test: Check Routing', async t => {
+test('Integration Test: Check Routing', t => {
   t.plan(4)
 
   try {
 
-    await createDom()
+    createDom()
     const store = configureStore(createInitialAppState())
     const browserHistory = createMemoryHistory('/')
     const history = syncHistoryWithStore(browserHistory, store)
@@ -31,7 +31,7 @@ test('Integration Test: Check Routing', async t => {
     // 2. Or ensure that you don't load React before you set up JSDOM, which is the only way I'm positive about,
     //   but it's also the most difficult and bug prone.
 
-    require('fbjs/lib/ExecutionEnvironment').canUseDOM = true
+    //require('fbjs/lib/ExecutionEnvironment').canUseDOM = true
 
     const wrapper = mount(
       <Provider store={store}>

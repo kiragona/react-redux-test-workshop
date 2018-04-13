@@ -9,13 +9,13 @@ import FavoritesContainer from './FavoritesContainer'
 
 import {createDom} from '../../../test/utils'
 
-test('FavoritesContainer: test connection to Redux store', async t => {
+test('FavoritesContainer: test connection to Redux store', t => {
     t.plan(1)
     try {
 
       const store = configureStore(createInitialAppState(null, favoritesMap))
 
-      await createDom()
+      createDom()
       const wrapper = mount(
         <Provider store={store}>
           <FavoritesContainer store={store}/>

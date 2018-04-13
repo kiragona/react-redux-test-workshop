@@ -22,11 +22,11 @@ import Favorites from '../src/gif-search-app/containers/FavoritesContainer'
 import {Router, Route, createMemoryHistory} from 'react-router'
 
 
-test('Full Integration Test: ', async t => {
+test('Full Integration Test: ', t => {
   t.plan(12)
   let contentDiv = null
   try {
-    await createDom()
+    createDom()
     const docQuerySelector = document.querySelector.bind(document)
     const docQuerySelectorAll = document.querySelectorAll.bind(document)
     const REACT_MODAL_PORTAL = 'ReactModalPortal'
@@ -40,8 +40,6 @@ test('Full Integration Test: ', async t => {
     const bodyElement = docQuerySelector('body')
     contentDiv = window.document.createElement('div')
     bodyElement.appendChild(contentDiv)
-
-    require('fbjs/lib/ExecutionEnvironment').canUseDOM = true
 
     ReactDOM.render(
       <Provider store={store}>
