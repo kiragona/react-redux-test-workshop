@@ -38,12 +38,4 @@ The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
 
-### Deploy to GitHub Pages
-
-### `npm run deploy`
-Deploys and enable to host project directly from a GitHub repository.
-
-Open [https://kiragona.github.io/react-redux-test-workshop/] to view it in the browser.
-
-
 
